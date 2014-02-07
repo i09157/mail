@@ -1,0 +1,23 @@
+<% if user_signed_in? %>
+
+<h1>My Account</h1> 
+<% if current_user.account.nil? %>
+<p>まだアカウントが作成されていません</p>
+<%= link_to 'アカウント作成', new_account_path, class: 'btn btn-primary'  %>
+<% else %>
+<%= link_to 'アカウントを編集',
+edit_account_path(current_user.account), :class => 'btn' %>
+<dl>
+  <dt><strong>氏名:</strong></dt>
+  <dd><%= current_user.account.kanjiname %></dd>
+  <dt><strong>フリガナ:</strong></dt>
+  <dd><%= current_user.account.kananame %></dd>
+  <dt><strong>メールアドレス:</strong></dt>
+  <dd><%= current_user.account.mail_addr %></dd>
+  <dt><strong>所属グループ:</strong></dt>
+  <dd><%= current_user.account.hierarchy.gname %></dd>
+</dl>
+<% end %>
+<hr />
+<% end %>
+

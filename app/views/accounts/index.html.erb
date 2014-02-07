@@ -1,0 +1,27 @@
+<%- model_class = Account -%>
+<div class="page-header">
+  <h1>アカウント一覧</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>氏名</th>
+      <th>ふりがな</th>
+      <th>メールアドレス</th>
+      <th>グループ名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @accounts.each do |account| %>
+      <tr>
+        <td><%= link_to account.kanjiname, account_path(account) %></td>
+        <td><%= account.kananame %></td>
+        <td><%= account.mail_addr %></td>
+        <td><%= link_to account.hierarchy.gname, hierarchy_path(account.hierarchy) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Back", :back %>
+

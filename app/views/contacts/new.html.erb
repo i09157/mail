@@ -1,0 +1,11 @@
+<%- model_class = Contact -%>
+<% unless current_user.account.blank? %>
+<div class="page-header">
+	<h1>新規メール作成</h1>
+</div>
+<%= render :partial => 'form' %>
+<% else %>
+ <script type="text/javascript">
+    window.location.href="/home/index"  // put your correct path in a string here
+  </script>
+<% end %>

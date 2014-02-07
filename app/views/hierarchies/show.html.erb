@@ -1,0 +1,22 @@
+<%- model_class = Hierarchy -%>
+<div class="page-header">
+  <h1><%= @hierarchy.gname %></h1>
+</div>
+
+<% unless @hierarchy.accounts.blank? %>
+<table class="table table-striped table-bordered">
+  <thead><tr><th>id</th><th>name</th></tr></thead>
+  <tbody>
+  <% @hierarchy.accounts.each do |account|%>
+      <tr>
+        <td><%= account.id %></td>
+        <td><%= account.kanjiname %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<% else %>
+<P>このグループにはユーザは存在しません。</p>
+<% end %>
+
+  <%= link_to 'Back',:back  %>

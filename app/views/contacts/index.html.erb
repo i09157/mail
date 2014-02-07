@@ -1,0 +1,33 @@
+<%- model_class = Contact -%>
+<div class="page-header">
+  <h2>送信済みメール</h2>
+</div>
+<% if current_user.contacts.any? %>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:to) %></th>
+      <th><%= model_class.human_attribute_name(:subject) %></th>
+      <th><%= model_class.human_attribute_name(:body) %></th>
+      <th><%= model_class.human_attribute_name(:reply) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% current_user.contacts.each do |contact| %>
+      <tr>
+        <td><%= contact.to %></td>
+        <td><%= link_to contact.subject , contact_path(contact) %></td>
+        <td><%= contact.body %></td>
+        <td><%= contact.reply %></td>
+        <td><%= simple_time(contact.created_at) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+<p>送信済みメールはありません。</p>
+<% end %>
+
+
+<%= link_to "戻る", :back %>

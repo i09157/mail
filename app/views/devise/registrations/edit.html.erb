@@ -1,0 +1,33 @@
+<h2>ユーザ編集</h2>
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "form-horizontal well"}) do |f| %>
+
+  <%#= devise_error_messages! %>
+  <%= f.input :uid, :autofocus => true %>
+  <%= f.input :email, :autofocus => true,:label =>'メールアドレス' %>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+  
+  <div>
+    <i>(leave blank if you don't want to change it)</i>
+    <%= f.input :password, :autocomplete => "off",:label =>'パスワード' %>
+    <%= f.input :password_confirmation, :autocomplete => "off",:label =>'パスワード（確認）' %> 
+  </div>
+  
+  <div>
+  <i>(we need your current password to confirm your changes)</i>
+  <%= f.input :current_password ,:label =>'現在のパスワード'%>
+  </div>
+  
+  <div class="form-actions">
+  <%= f.submit "変更する" ,class: 'btn btn-success'%>
+  <%= link_to "キャンセル" ,:back, class: 'btn'%>
+  </div>
+<% end %>
+
+<h3>ユーザ削除</h3>
+
+<p>削除しますか? <%= button_to "削除", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete ,:class =>'btn btn-danger'%></p>
+
+<%= link_to "Back", :back %>

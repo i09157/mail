@@ -1,0 +1,17 @@
+<%= simple_form_for @account, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :kanjiname,label: '氏名' %>
+  <%= f.input :kananame,label: 'ふりがな' %>
+  <%= f.input :mail_addr, :as => :email,label: 'メールアドレス' %>
+  <%#= f.input :hierarchy_id, , :collection => @hierarchies.map {|hierarchy| [hierarchy.gname, hierarchy.id]}, {:selected=>f.object.hierarchy_id}, :multiple => true, :size => @hierarchies.size %>
+  <div class="control-group">
+    <%= f.label '所属グループ' , :class => "control-label" %>
+    <div class="controls">
+   <%= f.collection_select :hierarchy_id, Hierarchy.all, :id, :gname %>  
+  </div>
+
+  <%= f.input :user_id, :as => :hidden %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to 'キャンセル',:back, class: 'btn' %>
+  </div>
+<% end %>

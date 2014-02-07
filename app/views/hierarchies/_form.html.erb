@@ -1,0 +1,9 @@
+<%= simple_form_for @hierarchy, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :p_id %>
+  <%= f.input :gname %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                hierarchies_path, :class => 'btn' %>
+  </div>
+<% end %>

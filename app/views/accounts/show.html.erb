@@ -1,0 +1,21 @@
+<%- model_class = Account -%>
+<div class="page-header">
+  <h1>アカウント情報</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong>氏名:</strong></dt>
+  <dd><%= @account.kanjiname %></dd>
+  <dt><strong>ふりがな:</strong></dt>
+  <dd><%= @account.kananame %></dd>
+  <dt><strong>メールアドレス:</strong></dt>
+  <dd><%= @account.mail_addr %></dd>
+  <dt><strong>所属グループ:</strong></dt>
+  <dd><%= @account.hierarchy.gname %></dd>
+  <dt><strong><%#= model_class.human_attribute_name(:hierarchy_id) %></strong></dt>
+  <dd><%#= @account.hierarchy_id %></dd>
+
+</dl>
+
+<%= link_to "戻る", :back,:class =>'btn' %>
+

@@ -1,0 +1,24 @@
+<%- model_class = Hierarchy -%>
+<div class="page-header">
+  <h1>グループ一覧</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th>親id</th>
+      <th><%= model_class.human_attribute_name(:gname) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @hierarchies.each do |hierarchy| %>
+      <tr>
+        <td><%= link_to hierarchy.id, hierarchy_path(hierarchy) %></td>
+        <td><%= hierarchy.p_id %></td>
+        <td><%= link_to hierarchy.gname, hierarchy_path(hierarchy) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "戻る", :back %>

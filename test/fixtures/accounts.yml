@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  kanjiname: MyString
+  kananame: MyString
+  mail_addr: MyString
+  hierarchy_id: 1
+
+two:
+  kanjiname: MyString
+  kananame: MyString
+  mail_addr: MyString
+  hierarchy_id: 1

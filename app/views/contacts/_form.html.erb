@@ -1,0 +1,104 @@
+
+  <%= form_for(@contact, html: {class: "form-horizontal well"}) do |f| %>
+
+  <% if @contact.errors.any? %>
+  <div  class="alert alert-error">
+    <a class="close" data-dismiss="alert" href="#">×</a>
+    <h4 class="alert-heading"><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h4>
+    <ul>
+      <% @contact.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  
+
+  <label class="control-label" for>To
+    <button class="btn btn-default" data-bind="click: addMailField">追加</button> 
+  </label>
+  <div class="controls" data-bind="foreach: mails">
+    <div class="control-group">  
+      <div>
+        <input autocomplete="off" data-bind="value: $data, typeaheadStudent: true" id="inputEmail" name="addresses[]" placeholder="メールアドレス" size="42" type="email" class="inputaddress">
+      </div>            
+    </div>
+  </div>
+
+  
+  <%  @contact.reply = current_user.account.mail_addr %>
+  <div class="control-group">
+    <%= f.label :reply , :class => "control-label" %>
+    <div class="controls">
+      <%= f.email_field :reply , :size => "42" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+   <%= f.label :subject , :class => "control-label" %>
+   <div class="controls">
+    <%= f.text_field :subject ,:size => "42"  ,:placeholder => "件名"%>
+  </div>
+</div>
+
+<div class="control-group">
+  <%= f.label :body , :class => "control-label" %>
+  <div class="controls">
+    <%= f.text_area :body ,{:cols => "20" ,:rows => "10",:placeholder => "メール本文"}  %>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :file , :class => "control-label"%>
+    <div class="controls">
+      <%= f.file_field :attachment , {name: 'attachment',
+        :id=>"file-input" 
+      } %>
+      <%#                               
+      <input type="file" id="file-input" name="attachment" style="display: none;">
+      <div class="input-prepend">
+        <a class="btn" onclick="$('#file-input').click();"><i class="icon-folder-open"></i></a>
+        <span id="cover" class="input-xlarge uneditable-input">select file</span>
+      </div>
+      %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit '送信する', :class => 'btn btn-primary' %>
+    <%= link_to 'キャンセル', :back, :class => 'btn' %>
+  </div>
+
+</form>
+<% end %>
+
+<script>
+$(function() {
+  function MailFormViewModel() {
+    var self = this;
+    self.title = ko.observable('');
+    self.body = ko.observable('');
+    self.mails = ko.observableArray([ko.observable('')]);
+
+    self.addMailField = function() {
+      self.mails.push(ko.observable(''))
+    }
+  }
+
+  window.mailForm = new MailFormViewModel();
+  ko.applyBindings(mailForm, $('#mail_form')[0]);
+});
+
+ko.bindingHandlers['typeaheadStudent'] = {
+  update: function(el) {
+    $(el).typeahead({
+      source: function(query, process) {
+        $.getJSON("/accounts.json").then(function(accounts) {
+          var addresses = $.map(accounts, function(account) { return account.mail_addr; });
+          process(addresses);
+        })
+      }
+    });
+  }
+};
+
+</script>
