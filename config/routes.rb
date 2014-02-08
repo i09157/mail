@@ -3,7 +3,7 @@ Mail::Application.routes.draw do
   
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
-  resources :hierarchies,only: [:show,:index]
+  resources :hierarchies,only: [:index,:show,:index]
 
   resources :accounts
 

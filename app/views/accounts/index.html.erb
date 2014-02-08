@@ -17,7 +17,12 @@
         <td><%= link_to account.kanjiname, account_path(account) %></td>
         <td><%= account.kananame %></td>
         <td><%= account.mail_addr %></td>
-        <td><%= link_to account.hierarchy.gname, hierarchy_path(account.hierarchy) %></td>
+        <td><% unless account.hierarchy.nil? %>
+             <%= link_to account.hierarchy.gname, hierarchy_path(account.hierarchy) %>
+            <% else %>
+              未所属
+            <% end %>
+        </td> 
       </tr>
     <% end %>
   </tbody>
